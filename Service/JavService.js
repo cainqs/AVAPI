@@ -11,9 +11,8 @@ functions.getAV = function(param){
     var orderStr = ' ReleaseDate ';
     var whereStr = '';
     
-    if(param.pageSize === undefined) param.pageSize = 20;
-    if(param.pageCount === undefined) param.pageCount = 1;  
-    pageStr += ` AND t.OnePage between ${((param.pageCount - 1) * param.pageSize) + 1} and ${param.pageCount * param.pageSize}`;
+    if(param.pagesize === undefined) param.pagesize = 20;
+    if(param.pagecount === undefined) param.pagecount = 1;  
     if(param.id !== undefined) whereStr += ` AND ID = '${param.id}'`;
     if(param.name !== undefined) whereStr += ` AND Name like '%${param.name}%'`;
     if(param.company !==  undefined) whereStr += ` AND Company like '%${param.company}%'`;
@@ -22,6 +21,7 @@ functions.getAV = function(param){
     if(param.category !== undefined) whereStr += ` AND category like '%${param.category}%'`;
     if(param.actress !== undefined) whereStr += ` AND actress like '%${param.actress}%'`;
     if(param.order === undefined) param.order = 'ASC';
+    pageStr += ` AND t.OnePage between ${((param.pagecount - 1) * param.pagesize) + 1} and ${param.pagecount * param.pagesize}`;
     orderStr += `${param.order}`
 
     var finalSql = util.format(avStr, orderStr, whereStr, pageStr);
@@ -37,8 +37,8 @@ functions.getAV = function(param){
                 var result = {};
                 var countInfo = {};
                 countInfo.totalCount = count;
-                countInfo.currentCount = param.pageCount;
-                countInfo.totalPage = Math.floor(count / param.pageSize) + 1;
+                countInfo.currentCount = param.pagecount;
+                countInfo.totalPage = Math.floor(count / param.pagesize) + 1;
                 result.data = data;
                 result.count = countInfo;
                 res(result);
