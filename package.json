@@ -3,6 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "dependencies": {
+    "express": "^4.16.3",
+    "msnodesqlv8": "^0.6.5",
+    "mssql": "^4.1.0",
+    "tedious": "^2.2.4"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,9 +22,5 @@
   "bugs": {
     "url": "https://github.com/cainqs/AVAPI/issues"
   },
-  "homepage": "https://github.com/cainqs/AVAPI#readme",
-  "dependencies": {
-    "msnodesqlv8": "^0.6.4",
-    "mssql": "^4.1.0"
-  }
+  "homepage": "https://github.com/cainqs/AVAPI#readme"
 }
