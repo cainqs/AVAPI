@@ -2,21 +2,42 @@ const config = require('./DBConfig')
 
 var functions = {};
 
-functions.getLog = function(pageSize, pageCount, callback){
-    config.javConn.connect().then(function(conn) {
-        var req = new config.sql.Request(conn);
-        req.query(`SELECT * FROM (
-                    SELECT *, ROW_NUMBER() OVER (ORDER BY JavLibraryLog) AS OnePage FROM JavLibraryLog 
-                ) AS t WHERE t.OnePage between ${(pageCount - 1) * pageSize} and ${pageCount * pageSize}`)
-                .then(function (recordset){
-                    callback(recordset);
-                    conn.close();
-                }).catch(function(err){
-                    console.log(err);
-                    conn.close();
-                });
-    }).catch(err => {
-        console.log(err);
+//获取AV
+functions.getAV = function(queryStr){
+    return new Promise(function(res, rej){
+        config.javConn.connect().then(function(conn) {
+            var req = new config.sql.Request(conn);
+            req.query(queryStr)
+                    .then(data => {
+                        res(data.recordset);
+                        conn.close();
+                    }).catch(err => {
+                        console.log(err);
+                        conn.close();
+                    });
+        }).catch(err => {
+            console.log(err);
+        });
+    });
+}
+
+//获取AV总数
+functions.getTotalAVCount = function(queryStr){
+    return new Promise(function(res, rej){
+        config.javConn.connect()
+        .then(conn => {
+            var req = new config.sql.Request(conn);
+            req.query(queryStr)
+            .then(data => {
+                res(data.recordset[0].Total);
+                conn.close();
+            }).catch(err => {
+                console.log(err);
+                conn.close();
+            })
+        }).catch(err => {
+            console.log(err);
+        })
     });
 }
 
