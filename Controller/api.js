@@ -3,7 +3,19 @@ const express = require('express');
 const app = express();
 
 app.get('/getav', function(req, res) {
-    javService.getAV(req.query.pagesize, req.query.pagecount, req.query.id, req.query.name, req.query.company, req.query.director, req.query.publisher, req.query.category, req.query.actress, req.query.order)
+    var param = {};
+    param.id = req.query.id;
+    param.name = req.query.name;
+    param.pageSize = req.query.pagesize;
+    param.pageCount = req.query.pagecount
+    param.company = req.query.company;
+    param.director = req.query.director;
+    param.publisher = req.query.publisher;
+    param.category = req.query.category;
+    param.actress = req.query.actress;
+    param.order = req.query.order;
+
+    javService.getAV(param)
     .then(result =>{
         console.log(result);
         res.send(result);
