@@ -61,4 +61,4 @@ typings/
 .next
 
 # Database configuration
-Helper/DBConfig.js
+Helpler/DBConfig.js
