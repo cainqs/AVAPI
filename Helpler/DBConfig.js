@@ -3,7 +3,7 @@ var configs = {}
 
 const JavDBConn = new sql.ConnectionPool({
     user: 'sa',
-    password: '19880118qs123',
+    password: '19880118Qs123!',
     server: 'www.cainqs.com',
     database: 'JavLibraryDownload'
 });
