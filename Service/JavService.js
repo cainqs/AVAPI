@@ -51,5 +51,19 @@ functions.getAV = function(param){
     });
 };
 
+functions.getCategory = function()
+{
+    return new Promise(function(res,rej){
+        javDB.getCategory()
+        .then(data =>{
+            var result = {}
+            result.data = data;
+            res(data);
+        }).catch(err =>{
+            console.log(err);
+        });
+    });
+}
+
 module.exports = functions;
 

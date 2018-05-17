@@ -13,6 +13,16 @@ app.get('/getav', function(req, res) {
     })
 });
 
+app.get('/getCategory', function(req, res){
+    javService.getCategory(req.query)
+    .then(result =>{
+        console.log(result);
+        res.send(result);
+    }).catch(err =>{
+        console.log(err);
+    })
+});
+
 app.get('/pic', function(req, res){
     res.sendFile(picService.getPic(req.query.id, req.query.name));
 });
