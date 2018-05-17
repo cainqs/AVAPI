@@ -1,7 +1,7 @@
 var functions = {};
 
 functions.getPic = function(id, name){
-    return `G:\\JavLibraryImages\\${id}${name}.jpg`;
+    return `G:\\JavLibraryImgs\\${id}${name}.jpg`;
 }
 
 module.exports = functions;
