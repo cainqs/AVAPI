@@ -41,4 +41,24 @@ functions.getTotalAVCount = function(queryStr){
     });
 }
 
+//获取类别
+functions.getCategory = function(){
+    return new Promise(function (res, rej){
+        config.javConn.connect()
+        .then(conn => {
+            var req = new config.sql.Request(conn);
+            req.query("SELECT * FROM Category")
+            .then(data => {
+                res(data.recordset);
+                conn.close();
+            }).catch(err => {
+                console.log(err);
+                conn.close();
+            })
+        }).catch(err => {
+            console.log(err);
+        })
+    });
+}
+
 module.exports = functions;
