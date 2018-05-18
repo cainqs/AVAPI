@@ -8,7 +8,7 @@ functions.getMatched = function(query)
 {
     return new Promise(function(res,rej){
         var sql = util.format(queryStr.matchedStr, query.avid)
-        scanDB.getMatched()
+        scanDB.getMatched(sql)
         .then(data =>{
             var result = {}
             result.data = data;

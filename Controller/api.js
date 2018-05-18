@@ -32,8 +32,14 @@ app.get('/pic', function(req, res){
 app.get('/getmatched', function(req, res){
     scanService.getMatched(req.query)
     .then(result =>{
-        console.log(result);
-        res.send(result);
+        var data = {};
+        //console.log(result.length)
+        if(result.length > 0){
+            data.ret = true;
+        }else{
+            data.ret = false;
+        }
+        res.send(data)
     }).catch(err =>{
         console.log(err);
     })
@@ -42,7 +48,8 @@ app.get('/getmatched', function(req, res){
 app.get('/video', function(req, res) {
     const path = scanService.getMatched(req.query)
     .then(result =>{
-        const path = result[0].location
+        const path = result[0].Location.trim();
+        console.log(path);
         const stat = fs.statSync(path)
         const fileSize = stat.size
         const range = req.headers.range
