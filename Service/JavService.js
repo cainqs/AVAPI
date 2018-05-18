@@ -13,7 +13,7 @@ functions.getAV = function(param){
     
     if(param.pagesize === undefined) param.pagesize = 20;
     if(param.pagecount === undefined) param.pagecount = 1;  
-    if(param.id !== undefined) whereStr += ` AND ID = '${param.id}'`;
+    if(param.id !== undefined) whereStr += ` AND ID like '${param.id}'`;
     if(param.name !== undefined) whereStr += ` AND Name like '%${param.name}%'`;
     if(param.company !==  undefined) whereStr += ` AND Company like '%${param.company}%'`;
     if(param.director !== undefined) whereStr += ` AND director like '%${param.director}%'`;
