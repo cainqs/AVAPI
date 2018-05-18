@@ -1,5 +1,6 @@
 const javService = require('../Service/JavService');
 const picService = require('../Service/PicService');
+const scanService = require('../Service/ScanService');
 const express = require('express');
 const app = express();
 var fs = require('fs')
@@ -26,6 +27,16 @@ app.get('/getCategory', function(req, res){
 
 app.get('/pic', function(req, res){
     res.sendFile(picService.getPic(req.query.id, req.query.name));
+});
+
+app.get('/getmatched', function(req, res){
+    scanService.getMatched(req.query)
+    .then(result =>{
+        console.log(result);
+        res.send(result);
+    }).catch(err =>{
+        console.log(err);
+    })
 });
 
 app.get('/video', function(req, res) {
@@ -57,7 +68,7 @@ app.get('/video', function(req, res) {
       res.writeHead(200, head)
       fs.createReadStream(path).pipe(res)
     }
-  });
+});
 
 var server = app.listen(8888, function() {
     console.log('Server is running..');
