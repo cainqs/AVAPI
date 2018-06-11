@@ -9,8 +9,8 @@ functions.getMatched = function(queryStr){
             var req = new config.sql.Request(conn);
             req.query(queryStr)
                     .then(data => {
-                        res(data.recordset);
                         conn.close();
+                        res(data.recordset);                     
                     }).catch(err => {
                         console.log(err);
                         conn.close();
