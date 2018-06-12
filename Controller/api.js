@@ -33,11 +33,10 @@ app.get('/getmatched', function(req, res){
     scanService.getMatched(req.query)
     .then(result =>{
         var data = {};
-        //console.log(result.length)
         if(result.length > 0){
-            data.ret = true;
+            data.ret = result[0].Location.trim() + "\\" + result[0].Name.trim();
         }else{
-            data.ret = false;
+            data.ret = "";
         }
         res.send(data)
     }).catch(err =>{
@@ -46,9 +45,7 @@ app.get('/getmatched', function(req, res){
 });
 
 app.get('/video', function(req, res) {
-    const path = scanService.getMatched(req.query)
-    .then(result =>{
-        const path = result[0].Location.trim();
+        const path = req.query.path;
         console.log(path);
         const stat = fs.statSync(path)
         const fileSize = stat.size
@@ -77,11 +74,6 @@ app.get('/video', function(req, res) {
           res.writeHead(200, head)
           fs.createReadStream(path).pipe(res)
         }
-
-    }).catch(err => {
-        console.log(err);
-    })
-
 });
 
 var server = app.listen(8888, function() {
