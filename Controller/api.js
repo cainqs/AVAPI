@@ -9,7 +9,6 @@ var fs = require('fs')
 app.get('/getav', function(req, res) {
     javService.getAV(req.query)
     .then(result =>{
-        console.log(result);
         res.send(result);
     }).catch(err =>{
         console.log(err);
@@ -19,7 +18,6 @@ app.get('/getav', function(req, res) {
 app.get('/getCategory', function(req, res){
     javService.getCategory(req.query)
     .then(result =>{
-        console.log(result);
         res.send(result);
     }).catch(err =>{
         console.log(err);
@@ -78,19 +76,67 @@ app.get('/video', function(req, res) {
 });
 
 app.get("/register", function(req, res){
-    userService.getUser(req.query)
-    .then(result =>{
-        console.log(result);
-        res.send(result);
-    }).catch(err =>{
-        console.log(err);
-    })
+    if(req.query.username == undefined || req.query.password == undefined || req.query.email == undefined){
+        res.send("fail");
+    }else{
+        userService.registerUser(req.query)
+        .then(result =>{
+            res.send(result);
+        }).catch(err =>{
+            console.log(err);
+        });
+    }
 });
 
 app.get("/login", function(req, res){
-
+    if(req.query.username == undefined || req.query.password == undefined){
+        res.send("fail");
+    }else{
+        userService.getUser(req.query)
+        .then(result =>{
+            res.send(result);
+        }).catch(err =>{
+            console.log(err);
+        });
+    }
 });
 
-var server = app.listen(8888, function() {
+app.get("/addlike", function(req, res){
+    userService.addLike(req.query)
+    .then(result =>{
+        res.send(result);
+    }).catch(err =>{
+        console.log(err);
+    });
+});
+
+app.get("/addwant", function(req, res){
+    userService.addWant(req.query)
+    .then(result =>{
+        res.send(result);
+    }).catch(err =>{
+        console.log(err);
+    });
+});
+
+app.get("/getlike", function(req, res){
+    userService.getLike(req.query)
+    .then(result =>{
+        res.send(result);
+    }).catch(err =>{
+        console.log(err);
+    });
+});
+
+app.get("/getwant", function(req, res){
+    userService.getWant(req.query)
+    .then(result =>{
+        res.send(result);
+    }).catch(err =>{
+        console.log(err);
+    });
+});
+
+var server = app.listen(9999, function() {
     console.log('Server is running..');
 });
