@@ -1,6 +1,7 @@
 const javService = require('../Service/JavService');
 const picService = require('../Service/PicService');
 const scanService = require('../Service/ScanService');
+const userService = require('../Service/UserService');
 const express = require('express');
 const app = express();
 var fs = require('fs')
@@ -74,6 +75,20 @@ app.get('/video', function(req, res) {
           res.writeHead(200, head)
           fs.createReadStream(path).pipe(res)
         }
+});
+
+app.get("/register", function(req, res){
+    userService.getUser(req.query)
+    .then(result =>{
+        console.log(result);
+        res.send(result);
+    }).catch(err =>{
+        console.log(err);
+    })
+});
+
+app.get("/login", function(req, res){
+
 });
 
 var server = app.listen(8888, function() {

@@ -15,8 +15,16 @@ const ScanDBConn = new sql.ConnectionPool({
     database: 'ScanAllAv'
 });
 
+const UserDBConn = new sql.ConnectionPool({
+    user: 'sa',
+    password: '19880118Qs123!',
+    server: 'www.cainqs.com',
+    database: 'AvManager'
+});
+
 configs.sql = sql;
 configs.javConn = JavDBConn;
-configs.scanConn = ScanDBConn
+configs.scanConn = ScanDBConn;
+configs.userConn = UserDBConn;
 
 module.exports = configs;
