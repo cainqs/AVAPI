@@ -90,7 +90,7 @@ app.get("/register", function(req, res){
 
 app.get("/login", function(req, res){
     if(req.query.username == undefined || req.query.password == undefined){
-        res.send("fail");
+        res.send({code: "fail"});
     }else{
         userService.getUser(req.query)
         .then(result =>{
@@ -137,6 +137,6 @@ app.get("/getwant", function(req, res){
     });
 });
 
-var server = app.listen(9999, function() {
+var server = app.listen(8888, function() {
     console.log('Server is running..');
 });
