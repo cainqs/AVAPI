@@ -118,4 +118,32 @@ functions.addWant = function(query)
      });
 }
 
+functions.removeLike = function(query)
+{
+     return new Promise(function(res,rej){
+         var sql = util.format(queryStr.removeLike, query.userid, query.avid)
+         userDB.removeLike(sql)
+         .then(data =>{
+            res({code: "success"});
+         }).catch(err =>{
+            res({code: "fail"});
+            console.log(err);
+         });
+     });
+}
+
+functions.removeWant = function(query)
+{
+     return new Promise(function(res,rej){
+         var sql = util.format(queryStr.removeLike, query.userid, query.avid)
+         userDB.removeWant(sql)
+         .then(data =>{
+            res({code: "success"});
+         }).catch(err =>{
+            res({code: "fail"});
+            console.log(err);
+         });
+     });
+}
+
 module.exports = functions;

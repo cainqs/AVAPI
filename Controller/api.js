@@ -137,6 +137,24 @@ app.get("/getwant", function(req, res){
     });
 });
 
+app.get("/removewant", function(req, res){
+    userService.removeWant(req.query)
+    .then(result =>{
+        res.send(result);
+    }).catch(err =>{
+        console.log(err);
+    });
+});
+
+app.get("/removelike", function(req, res){
+    userService.removeLike(req.query)
+    .then(result =>{
+        res.send(result);
+    }).catch(err =>{
+        console.log(err);
+    });
+});
+
 var server = app.listen(8888, function() {
     console.log('Server is running..');
 });

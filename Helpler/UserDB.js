@@ -114,4 +114,42 @@ functions.addWant = function(queryStr){
     });
 }
 
+functions.removeUser = function(queryStr){
+    return new Promise(function(res, rej){
+        config.userConn.connect().then(function(conn) {
+            var req = new config.sql.Request(conn);
+            req.query(queryStr)
+                    .then(data => {
+                        conn.close();
+                        res("success");
+                    }).catch(err => {
+                        conn.close();
+                        res("fail")
+                        console.log(err);                       
+                    });
+        }).catch(err => {
+            console.log(err);
+        });
+    });
+}
+
+functions.removeWant = function(queryStr){
+    return new Promise(function(res, rej){
+        config.userConn.connect().then(function(conn) {
+            var req = new config.sql.Request(conn);
+            req.query(queryStr)
+                    .then(data => {
+                        conn.close();
+                        res("success");
+                    }).catch(err => {
+                        conn.close();
+                        res("fail")
+                        console.log(err);                       
+                    });
+        }).catch(err => {
+            console.log(err);
+        });
+    });
+}
+
 module.exports = functions

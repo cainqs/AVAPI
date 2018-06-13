@@ -10,5 +10,7 @@ queryStr.getLike = `SELECT * FROM [Like] WHERE UserId = %s AND AvId = %s`;
 queryStr.getWant = `SELECT * FROM [Want] WHERE UserId = %s AND AvId = %s`;
 queryStr.saveLike = `INSERT INTO [Like] (UserId, AvId) VALUES (%s, %s)`;
 queryStr.saveWant = `INSERT INTO [Want] (UserId, AvId) VALUES (%s, %s)`;
+queryStr.removeLike = `DELETE FROM [Like] WHERE UserId = %s AND AvId = %s`;
+queryStr.removeWant = `DELETE FROM [Want] WHERE UserId = %s AND AvId = %s`;
 
 module.exports = queryStr;
