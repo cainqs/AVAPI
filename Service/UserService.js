@@ -7,13 +7,23 @@ var functions = {};
 functions.registerUser = function(query)
 {
     return new Promise(function(res,rej){
-        var sql = util.format(queryStr.getUser, query.username)
+        var sql = util.format(queryStr.getUser, query.username, query.email)
         userDB.getUser(sql)
         .then(data =>{
             if(data.length == 0){
-                userDB.saveUser(util.format(queryStr.saveUser, query.username, query.password, query.email)).then(data => {
-                    res({code: "success"});
+                userDB.saveUser(util.format(queryStr.saveUser, query.username, query.password, query.email)).then(data => {                 
+                    userDB.getUser(sql).then(d =>{
+                        if(d.length == 1){
+                            res({code : "success", UserId : d[0].UserID, UserName : d[0].UserName})
+                        }else{
+                            res({code : "fail"});
+                        }
+                    }).catch(e =>{
+                        res({code : "fail"});
+                        console.log(e);
+                    });
                 }).catch(err => {
+                    res({code : "fail"});
                     console.log(err);
                 })
             }else{
@@ -33,7 +43,7 @@ functions.getUser = function(query)
          userDB.getUser(sql)
          .then(data =>{
              if(data.length == 1){
-                res({code : "success", UserId : data[0].UserId});
+                res({code : "success", UserId : data[0].UserID, UserName : data[0].UserName});
              }else{
                  res({code : "fail"});
              }

@@ -46,8 +46,8 @@ functions.getLike = function(queryStr){
             var req = new config.sql.Request(conn);
             req.query(queryStr)
                     .then(data => {
-                        conn.close();
-                        res(data);
+                        res(data.recordset);
+                        conn.close();                       
                     }).catch(err => {
                         conn.close();
                         console.log(err);                       
@@ -65,7 +65,7 @@ functions.getWant = function(queryStr){
             req.query(queryStr)
                     .then(data => {
                         conn.close();
-                        res(data);
+                        res(data.recordset);
                     }).catch(err => {
                         conn.close();
                         console.log(err);                       
