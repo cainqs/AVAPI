@@ -86,6 +86,41 @@ functions.getLikeAv = function(param)
     });
 }
 
+functions.getWantAv = function(param)
+{
+    var avStr = queryStr.getWantAv;
+    var avCountStr = queryStr.wantAVCountStr;
+    var pageStr = '';
+    
+    pageStr += ` AND t.OnePage between ${((param.pagecount - 1) * param.pagesize) + 1} and ${param.pagecount * param.pagesize}`;
+
+    var finalSql = util.format(avStr, param.userid, pageStr);
+    var countSql = util.format(avCountStr, param.userid);
+    console.log('Final SQL -> ' + finalSql);
+    console.log('Count SQL -> ' + countSql);
+
+    return new Promise(function(res,rej){
+        javDB.getAV(finalSql)
+        .then(data =>{
+            javDB.getTotalAVCount(countSql)
+            .then(count =>{
+                var result = {};
+                var countInfo = {};
+                countInfo.totalCount = count;
+                countInfo.currentCount = param.pagecount;
+                countInfo.totalPage = Math.floor(count / param.pagesize) + 1;
+                result.data = data;
+                result.count = countInfo;
+                res(result);
+            }).catch(err => {
+                console.log(err);
+            });
+        }).catch(err =>{
+            console.log(err);
+        });
+    });
+}
+
 functions.getCategory = function()
 {
     return new Promise(function(res,rej){

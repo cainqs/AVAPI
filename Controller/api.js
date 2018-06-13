@@ -24,6 +24,15 @@ app.get('/getlikeav', function(req, res) {
     })
 });
 
+app.get('/getwantav', function(req, res) {
+    javService.getWantAv(req.query)
+    .then(result =>{
+        res.send(result);
+    }).catch(err =>{
+        console.log(err);
+    })
+});
+
 app.get('/getCategory', function(req, res){
     javService.getCategory(req.query)
     .then(result =>{
