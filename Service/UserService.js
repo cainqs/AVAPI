@@ -135,7 +135,7 @@ functions.removeLike = function(query)
 functions.removeWant = function(query)
 {
      return new Promise(function(res,rej){
-         var sql = util.format(queryStr.removeLike, query.userid, query.avid)
+         var sql = util.format(queryStr.removeWant, query.userid, query.avid)
          userDB.removeWant(sql)
          .then(data =>{
             res({code: "success"});

@@ -114,7 +114,7 @@ functions.addWant = function(queryStr){
     });
 }
 
-functions.removeUser = function(queryStr){
+functions.removeLike = function(queryStr){
     return new Promise(function(res, rej){
         config.userConn.connect().then(function(conn) {
             var req = new config.sql.Request(conn);
