@@ -33,7 +33,7 @@ functions.getUser = function(query)
          userDB.getUser(sql)
          .then(data =>{
              if(data.length == 1){
-                res({code : "success"});
+                res({code : "success", UserId : data[0].UserId});
              }else{
                  res({code : "fail"});
              }

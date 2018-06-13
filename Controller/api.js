@@ -90,7 +90,7 @@ app.get("/register", function(req, res){
 
 app.get("/login", function(req, res){
     if(req.query.username == undefined || req.query.password == undefined){
-        res.send("fail");
+        res.send({code: "fail"});
     }else{
         userService.getUser(req.query)
         .then(result =>{
